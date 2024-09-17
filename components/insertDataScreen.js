@@ -15,7 +15,7 @@ export default insertDataScreen = () => {
                 onChangeText={onChangeUid}
                 value={user_id}
             />
-            <Text>User Name</Text>
+            <Text>User Name kkk</Text>
             <TextInput
                 style={styles.input}
                 onChangeText={onChangeUname}
@@ -27,7 +27,7 @@ export default insertDataScreen = () => {
                 onChangeText={onChangePwd}
                 value={passwd}
             />
-            <Text>====================================================</Text>
+            <Text>===============================================</Text>
             <Button
                 title="Insert Data"
                 onPress={() => {
