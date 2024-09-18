@@ -6,7 +6,7 @@ export default function JsonScreen({ navigation }) {
   const [data, setData] = useState([]); 
  
   useEffect(() => { 
-    fetch('http://172.21.12.212/mobileapp/showmobile.php') 
+    fetch('http://192.168.56.1/mobileapp/showmobile.php') 
       .then((response) => response.json()) 
       .then((json) => { 
         console.log('Data received:', json); // ตรวจสอบข้อมูลที่ได้รับ 

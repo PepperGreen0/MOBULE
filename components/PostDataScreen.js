@@ -35,7 +35,7 @@ export default PostDataScreen = () => {
                     datap.append("user_id", user_id);
                     datap.append("username", user_name);
                     datap.append("passwd", passwd);
-                    fetch('http://172.21.12.212/mobileapp/postdb.php?',{
+                    fetch('http://192.168.56.1/mobileapp/postdb.php?',{
                     method: 'POST',
                     headers: {
                         Accept: 'application/json',
