@@ -1,42 +1,28 @@
-import React, { useState } from 'react';
-import { View, TextInput, Button, FlatList, Text } from 'react-native';
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "androiddb";
+$user_id = $_GET["user_id"];
 
-export default function SearchScreen() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [results, setResults] = useState([]);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-  const handleSearch = () => {
-    fetch(`http://192.168.56.1/mobileapp/search.php?user_id=${searchTerm}`)
-      .then((response) => response.json())
-      .then((json) => {
-        console.log('Search Results:', json);
-        setResults(json);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  };
-
-  return (
-    <View style={{ padding: 20 }}>
-      <TextInput
-        placeholder="Enter User ID"
-        value={searchTerm}
-        onChangeText={(text) => setSearchTerm(text)}
-        style={{ borderBottomWidth: 1, marginBottom: 10 }}
-      />
-      <Button title="Search" onPress={handleSearch} />
-      <FlatList
-        data={results}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View style={{ padding: 10, borderBottomWidth: 1 }}>
-            <Text>ID: {item.id}</Text>
-            <Text>User ID: {item.user_id}</Text>
-            <Text>User Name: {item.user_name}</Text>
-          </View>
-        )}
-      />
-    </View>
-  );
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+
+$sql = "SELECT * FROM usertb WHERE user_id = '$user_id'";
+$result = $conn->query($sql);
+
+$data = array();
+
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+}
+
+echo json_encode($data);
+
+$conn->close();
+?>
