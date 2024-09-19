@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'; 
 import { FlatList, Text, View, Button, TouchableOpacity, ActivityIndicator, Alert } from 'react-native'; 
 
-export default function JsonScreen({ navigation }) { // เพิ่ม navigation เข้ามา
+export default function JsonScreen({ navigation }) { 
   const [isLoading, setLoading] = useState(true); 
   const [data, setData] = useState([]); 
   const [selectedId, setSelectedId] = useState(null);
 
   useEffect(() => { 
-    fetch('http://192.168.56.1/mobileapp/showmobile.php') 
+    fetch('http://172.21.12.212/mobileapp/showmobile.php') 
       .then((response) => response.json()) 
       .then((json) => { 
         console.log('Data received:', json); 
@@ -24,8 +24,8 @@ export default function JsonScreen({ navigation }) { // เพิ่ม navigati
 
   const handleDelete = (user_id) => {
     console.log('Deleting user_id:', user_id); // ตรวจสอบค่า user_id ก่อน
-    fetch(`http://192.168.56.1/mobileapp/dropdb.php?id=${encodeURIComponent(user_id)}`, {
-      method: 'GET', // เปลี่ยนเป็น GET
+    fetch(`http://172.21.12.212/mobileapp/dropdb.php?id=${encodeURIComponent(user_id)}`, {
+      method: 'GET', 
     })
       .then((response) => response.text())
       .then((responseText) => {
@@ -34,7 +34,7 @@ export default function JsonScreen({ navigation }) { // เพิ่ม navigati
           setData((prevData) => prevData.filter((item) => item.user_id !== user_id));
           Alert.alert('Success', 'Record deleted successfully');
         } else {
-          Alert.alert('Error', responseText); // แสดงข้อความที่ตอบกลับจาก PHP script
+          Alert.alert('Error', responseText); 
         }
       })
       .catch((error) => {

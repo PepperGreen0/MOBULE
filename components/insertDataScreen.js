@@ -15,7 +15,7 @@ export default insertDataScreen = () => {
                 onChangeText={onChangeUid}
                 value={user_id}
             />
-            <Text>User Name kkk</Text>
+            <Text>User Name</Text>
             <TextInput
                 style={styles.input}
                 onChangeText={onChangeUname}
@@ -31,7 +31,7 @@ export default insertDataScreen = () => {
             <Button
                 title="Insert Data"
                 onPress={() => {
-                    fetch('http://192.168.56.1/mobileapp/insertdb.php?user_id='+ user_id +'&user_name='+user_name + '&passwd='+ passwd)
+                    fetch('http://172.21.12.212/mobileapp/insertdb.php?user_id='+ user_id +'&user_name='+user_name + '&passwd='+ passwd)
                         .then((response) => response.json())
                         .then((json) => setData(json))
                         .catch((error) => console.error(error))
